@@ -1,0 +1,29 @@
+{
+    "name": "canvaskill",
+    "description": "",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "webpack",
+        "dev": "webpack --watch",
+        "deploy": "vercel --prod"
+    },
+    "devDependencies": {
+        "ts-loader": "^9.5.2",
+        "typescript": "^5.9.2",
+        "webpack": "^5.101.3",
+        "webpack-cli": "^6.0.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/k-tten/canvaskill.git"
+    },
+    "keywords": [],
+    "author": "k-tten <cursors.owo.uwu@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/k-tten/canvaskill/issues"
+    },
+    "homepage": "https://github.com/k-tten/canvaskill#readme",
+    "main": "webpack.config.js"
+}
