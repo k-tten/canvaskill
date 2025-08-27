@@ -27,8 +27,21 @@ interface LastPosition {
 
 class BaseWindow {
     static instances: BaseWindow[] = [];
+    static #zIndexCounter = 1;
     static readonly WINDOW_MIN_WIDTH = 192;
     static readonly WINDOW_MIN_HEIGHT = 24;
+
+    static readonly #LISTENERS = new Map<keyof DocumentEventMap, Map<BaseWindow, EventListener>>();
+
+    static {
+        ["click", "mouseleave", "mouseup", "mousemove"].forEach((event) => {
+            const listeners = new Map<BaseWindow, EventListener>();
+
+            BaseWindow.#LISTENERS.set(event as keyof DocumentEventMap, listeners);
+
+            document.addEventListener(event, (e) => listeners.forEach((l) => l(e)));
+        });
+    }
 
     #position!: Vector2;
     #dimensions!: Vector2;
@@ -67,6 +80,11 @@ class BaseWindow {
         this.dimensions = dimensions;
         this.hidden = false;
 
+        this.#container.style.zIndex = String(BaseWindow.#zIndexCounter++);
+        ["mousedown", "touchstart", "pointerdown", "focusin", "click"].forEach((evt) => {
+            this.#container.addEventListener(evt, () => this.bringToFront());
+        });
+
         document.body.appendChild(this.#container);
         BaseWindow.instances.push(this);
     }
@@ -99,10 +117,10 @@ class BaseWindow {
 
         const reset = this.#resetDragging.bind(this);
 
-        document.addEventListener("click", reset);
-        document.addEventListener("mouseleave", reset);
-        document.addEventListener("mouseup", reset);
-        document.addEventListener("mousemove", this.#drag.bind(this));
+        BaseWindow.#LISTENERS.get("click")!.set(this, reset);
+        BaseWindow.#LISTENERS.get("mouseup")!.set(this, reset);
+        BaseWindow.#LISTENERS.get("mouseleave")!.set(this, reset);
+        BaseWindow.#LISTENERS.get("mousemove")!.set(this, (e) => this.#drag(e as MouseEvent));
 
         this.#qs(".window-title")?.addEventListener("mousedown", () => (this.#isDragging.title = true));
         this.#qs(".window-title")?.addEventListener("mouseup", () => {
@@ -195,6 +213,11 @@ class BaseWindow {
             l: { x: 0, y: 0, l: 0, w: 0 },
             t: { x: 0, y: 0, t: 0, h: 0 },
         };
+    }
+
+    bringToFront() {
+        BaseWindow.#zIndexCounter++;
+        this.#container.style.zIndex = String(BaseWindow.#zIndexCounter);
     }
 
     get x() {

@@ -1,0 +1,2 @@
+-   [x] focused window should be on top, manage z indexes of windows
+-   [ ] game windows will ignore this feature, but they should always be under other windows
