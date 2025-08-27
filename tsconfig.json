@@ -11,8 +11,6 @@
         "alwaysStrict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
-        "noUnusedParameters": true,
-        "noUnusedLocals": true,
         "exactOptionalPropertyTypes": true,
         "skipLibCheck": true,
         "sourceMap": true,

@@ -1,14 +1,9 @@
+import { BaseWindow } from "./BaseWindow";
 import { Vector2 } from "./Vector2";
 
-class GameWindow {
-    #pos: Vector2;
-    #dim: Vector2;
-    #canvas: HTMLCanvasElement;
-
-    constructor(position: Vector2, dimensions: Vector2) {
-        this.#pos = position;
-        this.#dim = dimensions;
-
-        this.#canvas = document.createElement("canvas");
-    }
-}
+new BaseWindow(new Vector2(window.innerWidth / 2 - 300 / 2, window.innerHeight / 2 - 200 / 2), new Vector2(300, 200), {
+    bar: { icon: "🌟", title: "canvaskill", close: true },
+    movable: true,
+    resizable: true,
+    content: "This is a simple window example.",
+});

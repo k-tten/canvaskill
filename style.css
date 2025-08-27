@@ -1,0 +1,205 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.window {
+    position: absolute;
+    display: flex;
+
+    border: 2px solid #eee;
+    border-radius: 2px;
+}
+
+.show-window {
+    opacity: 1;
+    pointer-events: auto;
+    user-select: auto;
+}
+
+.hide-window {
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+
+.window {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid #111;
+    border-radius: 4px;
+
+    background-color: #eee;
+
+    min-width: 192px;
+    min-height: 24px;
+}
+
+.window-container {
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+
+    overflow: hidden;
+}
+
+.window-header {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 1.5rem;
+}
+
+.window-content {
+    flex: 1;
+
+    border-radius: 4px;
+
+    background-color: white;
+}
+
+.window-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    user-select: none;
+
+    cursor: move;
+
+    flex: 1;
+
+    padding: 0.5rem 0;
+
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 0.9rem;
+
+    text-align: center;
+}
+
+.window-icon {
+    width: 16px;
+    height: 16px;
+
+    margin-left: 0.25rem;
+
+    font-size: 12px;
+
+    user-select: none;
+
+    display: grid;
+    place-items: center;
+}
+
+.trigger {
+    position: absolute;
+
+    z-index: 10;
+}
+
+.r {
+    top: 0;
+    right: -2px;
+    bottom: 0;
+    width: 4px;
+    cursor: col-resize;
+}
+
+.l {
+    top: 0;
+    left: -2px;
+    bottom: 0;
+    width: 4px;
+    cursor: col-resize;
+}
+
+.t {
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    cursor: row-resize;
+}
+
+.b {
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    cursor: row-resize;
+}
+
+.tr {
+    top: -3px;
+    right: -3px;
+    width: 6px;
+    height: 6px;
+    cursor: nesw-resize;
+}
+
+.tl {
+    top: -3px;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    cursor: nwse-resize;
+}
+
+.br {
+    bottom: -3px;
+    right: -3px;
+    width: 6px;
+    height: 6px;
+    cursor: nwse-resize;
+}
+
+.bl {
+    bottom: -3px;
+    left: -3px;
+    width: 6px;
+    height: 6px;
+    cursor: nesw-resize;
+}
+
+.window-close {
+    background: red;
+
+    border: none;
+    outline: none;
+
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    margin-right: 0.5rem;
+}
+
+.no-move {
+    cursor: default !important;
+}
